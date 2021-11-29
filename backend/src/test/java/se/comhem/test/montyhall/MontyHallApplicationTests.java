@@ -44,5 +44,15 @@ public class MontyHallApplicationTests {
 		
 		simController.postSimulation(input);
 	}
+	
+	
+	@Test(expected = InternalError.class)
+	public void throwsInternalErrorOnOver100MilSims() throws Exception {
+		Map<String, Object> input = new HashMap<>();
+		input.put(SimulationOutputFields.NUM_OF_SIMS.getString(), 100_000_001);
+		input.put(SimulationOutputFields.WILL_SWAP_DOOR.getString(), true);
+		
+		simController.postSimulation(input);
+	}
 
 }
